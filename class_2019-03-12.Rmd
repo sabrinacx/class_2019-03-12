@@ -1,0 +1,21 @@
+---
+title: "Class-2019-03-12"
+author: "Alistair Gluck"
+date: "3/12/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(janitor)
+library(lubridate)
+```
+
+```{r}
+germany<-read.csv("polls_DE-parliament_2019-03-12.csv") %>% 
+  clean_names() %>% 
+  mutate(month = parse_date(date, format = "%Y%m%d"))
+```
+
