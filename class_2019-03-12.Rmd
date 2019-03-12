@@ -44,7 +44,8 @@ spain <- read_csv("https://pollofpolls.eu/get/polls/ES-parliament/format/csv",
 ```{r}
 good_firms <- spain %>% 
   count(firm) %>% 
-  filter(n >= 40)
+  filter(n >= 40) %>% 
+  pull(firm)
 
 good_firms
 
@@ -52,16 +53,19 @@ good_firms
 
 ```{r}
 spain %>% 
-  arrange(desc(date)) %>% 
-  filter(date > "2018-03-12") %>% 
-  filter(firm %in% c("Celeste-Tel",			
-"GAD3",			
-Invymark	105			
-Metroscopia	77			
-NC Report	78			
-Sigma Dos	41			
-Simple Lógica"))
+  filter(date > Sys.Date() - 365) %>% 
+  filter(firm %in% good_firms) %>%
+  gather(key = party, value = Podemos, PSOE, PP, Cs, VOX))
+  # ggplot(aes(x = date, y %in% c(Podemos, PSOE, PP, Cs, VOX))) +
+  # geom_line()
 ```
-
+         
+         # %in% c("Celeste-Tel",			
+         #              "GAD3",			
+         #              "Invymark",			
+         #              "Metroscopia",			
+         #              "NC Report",		
+         #              "Sigma Dos",			
+         #              "Simple Lógica")) %>% 
 
 
