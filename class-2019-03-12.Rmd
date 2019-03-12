@@ -1,0 +1,15 @@
+---
+title: "Class-2019-03-12"
+author: "Sabrina Chok"
+date: "3/12/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+
+germany <- read.csv("polls_DE-parliament_2019-03-12.csv")
+```
+
