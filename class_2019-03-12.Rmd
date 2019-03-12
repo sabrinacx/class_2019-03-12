@@ -13,9 +13,55 @@ library(janitor)
 library(lubridate)
 ```
 
-```{r}
-germany<-read.csv("polls_DE-parliament_2019-03-12.csv") %>% 
-  clean_names() %>% 
-  mutate(month = parse_date(date, format = "%Y%m%d"))
+```{r, cache = TRUE}
+
+spain <- read_csv("https://pollofpolls.eu/get/polls/ES-parliament/format/csv", 
+                  col_types = cols(
+                                  date = col_date(format = ""),
+                                  firm = col_character(),
+                                  n = col_double(),
+                                  sd = col_double(),
+                                  source = col_character(),
+                                  PP = col_double(),
+                                  PSOE = col_double(),
+                                  BNG = col_double(),
+                                  CC = col_double(),
+                                  ERC = col_double(),
+                                  PNVEAJ = col_double(),
+                                  Cs = col_double(),
+                                  VOX = col_double(),
+                                  Podemos = col_double(),
+                                  EHBildu = col_double(),
+                                  PACMA = col_double(),
+                                  PDeCAT = col_double()
+                                  ))
+  #clean_names() %>% 
+  #mutate(month = parse_date(date, format = "%Y%m%d"))
 ```
+
+
+
+```{r}
+good_firms <- spain %>% 
+  count(firm) %>% 
+  filter(n >= 40)
+
+good_firms
+
+```
+
+```{r}
+spain %>% 
+  arrange(desc(date)) %>% 
+  filter(date > "2018-03-12") %>% 
+  filter(firm %in% c("Celeste-Tel",			
+"GAD3",			
+Invymark	105			
+Metroscopia	77			
+NC Report	78			
+Sigma Dos	41			
+Simple Lógica"))
+```
+
+
 
